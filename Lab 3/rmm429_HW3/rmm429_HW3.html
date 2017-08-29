@@ -1,0 +1,165 @@
+<!-- File: rmm429_HW3.html -->
+<!-- Purpose: To get the factorial or summation of an inputted value -->
+<!-- Author: Richard Mangerie -->
+<!-- Last Updated: 07/30/2017 -->
+
+<!doctype html>
+<html>
+<head>
+	
+	<!-- Sources for the use of jQuery and AJAX -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+	<!-- JavaScript code -->
+	<script type="text/javascript">
+		
+		//Function fact()
+		//Purpose: Calculate the factorial of a number
+		//Input: A non-negative integer n
+		//Output: No direct return value, div "answer" is populated with the factorial
+		function fact(n)
+		{
+			//Location of the Nodejs /fact code
+			var URL = "http://localhost:8080/fact";
+			//Creating a JSON with the key "input" and the value n
+			var input_json = { input:n }
+			
+			//Making an AJAX call to the URL for /fact
+			$.ajax
+			({
+				//Getting information
+				type: "GET",
+				//Data located at the url specified by URL
+				url: URL,
+				//Input data is of type JSON
+				contentType: "application/json",
+				//The data contained in "input_json" is sent
+				data: input_json,
+				//Data is returned as html
+				dataType: "html",
+				//Function that is called upon a successful AJAX request
+				success: function(msg)
+				{
+					//Populating the div with ID "answer" with a vertical break and the response from the server
+					document.getElementById("answer").innerHTML = "<br>" + msg;
+				},
+				//Function that is called upon an unsuccessful AJAX request
+				error: function(jgXHR, textStatus, errorThrown)
+				{
+					//Alerting that there was an error
+					alert("Error: " + textStatus + " " + errorThrown);
+				}
+			});
+		}
+		
+		//Function sum()
+		//Purpose: Calculate the summation of a number
+		//Input: A non-negative integer n
+		//Output: No direct return value, div "answer" is populated with the summation
+		function sum(n)
+		{
+			//Location of the Nodejs /sum code
+			var URL = "http://localhost:8080/sum";
+			//Creating a JSON with the key "input" and the value n
+			var input_json = { input:n }
+			
+			//Making an AJAX call to the URL for /fact
+			$.ajax
+			({
+				//Getting information
+				type: "GET",
+				//Data located at the url specified by URL
+				url: URL,
+				//Input data is of type JSON
+				contentType: "application/json",
+				//The data contained in "input_json" is sent
+				data: input_json,
+				//Data is returned as html
+				dataType: "html",
+				//Function that is called upon a successful AJAX request
+				success: function(msg)
+				{
+					//Populating the div with ID "answer" with a vertical break and the response from the server
+					document.getElementById("answer").innerHTML = "<br>" + msg;
+				},
+				//Function that is called upon an unsuccessful AJAX request
+				error: function(jgXHR, textStatus, errorThrown)
+				{
+					//Alerting that there was an error
+					alert("Error: " + textStatus + " " + errorThrown);
+				}
+			});
+		}
+		
+		//Function fact_or_sum()
+		//Purpose: Determine whether or not to call the fact() or sum() function
+		//Input: None
+		//Output: No direct return value, either the function fact() or sum() will be called with input "val"
+		function fact_or_sum()
+		{
+			//Getting the integer in the text box specified by ID "n"
+			var val = parseInt(document.getElementById("n").value);
+			//Creating a variable for the selection box specified by ID "fact_sum"
+			var fact_sum_select = document.getElementById("fact_sum");
+			//Getting the selection option from the selection box specified by variable "fact_sum_select"
+			var selection = fact_sum_select.options[fact_sum_select.selectedIndex].value;
+			
+			//If the input value is not an integer or a negative integer
+			if (isNaN(val) || val < 0)
+			{
+				//Alert the user to enter a valid integer
+				alert("Please enter a valid integer!");
+			}
+			//If the input value is a non-negative integer
+			else
+			{
+				//If the value of selection is "fact"
+				if (selection == "fact")
+				{
+					//Call the function fact() and send the input value
+					fact(val);
+				}
+				//If the value of selection is "sum"
+				else if (selection == "sum")
+				{
+					//Call the function sum() and send the input value
+					sum(val);
+				}
+			}
+		}
+		
+	</script>
+
+<meta charset="UTF-8">
+
+<!-- The tab title of the HTML page -->
+<title>Richard Mangerie Lab 3</title>
+</head>
+
+<body>
+	<!-- The main div -->
+	<div>
+		<!-- Input box with ID "n" -->
+		<input type="text" id="n" style="width: 150px" placeholder="Enter a non-negative integer...">
+		<br>
+		<br>
+		<!-- Selection box with ID "fact_sum -->
+		<select id ="fact_sum">
+			<!-- Option "fact" -->
+			<option value="fact">Factorial</option>
+			<!-- Option "sum -->
+			<option value="sum">Summation</option>
+		</select>
+		<br>
+		<br>
+		<!-- Button with ID "calc" that calls JavaScript function "fact_or_sum()" on click -->
+		<button id="calc" onClick="fact_or_sum()">Calculate</button>
+	</div>
+	
+	<!-- Answer div -->
+	<div id="answer">
+		<!-- empty div -->
+	</div>
+	
+</body>
+</html>

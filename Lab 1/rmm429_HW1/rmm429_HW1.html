@@ -1,0 +1,156 @@
+<!--
+Name: Richard Mangerie
+Assignment: Lab 1
+Title: rmm429_HW1.html
+Purpose: To provide a brief history on the Fibonacci sequence and produce a table of Fibonacci values given an index
+Last Updated: 7/10/2017
+-->
+
+
+<!doctype html>
+<html>
+<head>
+
+<!-- A section of the HTML head that will contain JavaScript code -->
+<script type="text/javascript">
+
+	//function get_table(), which produces the table of Fibonacci values
+	//input: none
+	//output: a table of Fibonacci values, starting at 0 and listing values until n, which is a user-inputted integer or one of two error messages
+	function get_table()
+	{
+		//Variable that references the empty div where the table (or error message) will be outputted
+		var empty_div = document.getElementById("fib_output");
+		//Clearing the contents of the div, if anything is in it, to ensure it is empty
+		empty_div.innerHTML = ""
+		
+		//Variable that references the text box where the user inputs an integer
+		var text_box = document.getElementById("fib_input");
+		
+		//Getting the value from the text box referenced by the variable text_box
+		var fib_input = text_box.value;
+		
+		//Converting the variable fib_input to an integer
+		var fib_num = parseInt(fib_input);
+		
+		//If the varible fib_num is NaN (which means a String was entered)
+		if (isNaN(fib_num))
+		{
+			//Populate the empty div with the message "Invalid Input"
+			empty_div.innerHTML = "Invalid Input"
+		}
+		//If the variable fib_num is a negative number
+		else if (fib_num < 0)
+		{
+			//Populate the empty div with the message "Cannot compute Fib of a negative integer"
+			empty_div.innerHTML = "Cannot compute Fib of a negative integer"
+		}
+		//If the variable fib_num contains valid input
+		else
+		{
+			//Creating a variable fib_table that is the table where the Fibonacci values will go
+			var fib_table = document.createElement('table');
+			//Setting the width of the table to 50%
+			fib_table.setAttribute('width','50%');
+			
+			//Going through each possbile Fibonacci value from 0 to n
+			while (fib_num >= 0)
+			{
+				//Increasing the variable rows by 1
+				//rows++;
+				
+				//Getting the value in the Fibonacci sequence specified by the index fib_num
+				var fib_ans = fib(fib_num);
+				
+				//Creating and inserting a row at the top of the table
+				var fib_row = fib_table.insertRow(0);
+				
+				//Creating two cells (two column cells) in the current row of the table
+				var fib_num_cell = fib_row.insertCell(0);
+				var fib_ans_cell = fib_row.insertCell(1);
+				
+				//Placing the value fib_num in the first cell of the row and the value fib_ans in the second cell of the row
+				fib_num_cell.innerHTML = fib_num;
+				fib_ans_cell.innerHTML = fib_ans;
+				
+				//Decreasing the index fib_num by 1
+				fib_num--;
+			}
+			
+			//Creating and inserting a row at the top of the table
+			var fib_row = fib_table.insertRow(0);
+			
+			//Creating two cells (two column cells) in the current row of the table
+			var fib_num_cell = fib_row.insertCell(0);
+			var fib_ans_cell = fib_row.insertCell(1);
+			
+			//Placing the String "n" in the first cell and the String "fib(n)" in the second cell, which serve as our column labels
+			fib_num_cell.innerHTML = "n";
+			fib_ans_cell.innerHTML = "fib(n)";
+			
+			//Placing the Fibonacci table in the empty div
+			empty_div.appendChild(fib_table);
+			
+		}
+		
+		
+	}
+	
+	
+	//function fib(), which produces a Fibonacci value specified by an index in the Fibonacci sequence
+	//input: a positive integer or 0
+	//output: a positive integer which signifies the value in the Fibonnaci sequence specified by the input integer or 0
+	function fib(n)
+	{
+		//If the input is 0, return 0
+		if (n == 0)
+		{
+			return 0;
+		}
+		//If the input is 1, return 1
+		else if (n == 1)
+		{
+			return 1;
+		}
+		//If the input is not 0 or 1, add two recursive calls of fib together, the first recursive call having input of (n-1) and the second recursive call having input of (n-2)
+		else
+		{
+			return fib(n-1) + fib(n-2);
+		}
+	}
+	
+</script>
+
+<meta charset="UTF-8">
+
+<!-- The title of the HTML page -->
+<title>Richard Mangerie Lab 1</title>
+
+</head>
+
+<body>
+
+<!-- The first section -->
+<div>
+<!-- A paragraph within the div about the history of the Fibonacci sequence -->
+<p>The Fibonacci Sequence are the numbers are characterized by the fact that every number after the first two is the sum of the two preceeding ones.  By definition, the first two numbers in the Fibonacci Sequence are either 1 and 1, or 0 and 1, depending on the chosen starting point of the sequence, and each subsequent number is the sum of the previous two.  The Fibonacci Sequence was discovered by Leonardo of Pisa, better known by his nickname Fibonacci, while looing at how generations of rabbits breed.  It was noted that after each monthy generation, the number of pairs of rabbits increased from 1 to 2 to 3 to 5 to 8 to 13, etc. and identified how the sequence progressed by adding the previous two terms, a sequence which could in theory extend indefinitely.</p>
+<!-- An image on the Fibonacci sequence -->
+<img src="http://4.bp.blogspot.com/-g5j2apvqkew/VmZF7vuSkkI/AAAAAAAAMh8/ib_hHa1Mta0/s1600/Screenshot_9.png">
+</div>
+
+<!-- The second section -->
+<div>
+<!-- A text box with id fib_input -->
+<input type=text id="fib_input">
+<!-- A button that, when pressed, will call the JavaScript function get_table() -->
+<button type=button onClick="get_table()">Calculate</button>
+</div>
+
+<!-- The third section with id fib_output -->
+<div id="fib_output">
+<!-- An empty div -->
+</div>
+
+</body>
+
+</html>

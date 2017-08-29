@@ -1,0 +1,624 @@
+<html>
+<head>
+
+	<meta charset="UTF-8">
+
+	<!-- Sources for the use of jQuery, jQuery Mobile, and AJAX -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css"/>
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	
+	<!-- JavaScript code -->
+	<script type="text/javascript">
+		
+		//Function home()
+		//Purpose: Populate a div with instructions on how to use the web page
+		//Input: None
+		//Output: No direct return, populates a div with content returned from an AJAX call
+		function home()
+		{
+			
+			//Location of the Nodejs /home code
+			var URL = "http://localhost:8080/home";
+
+			//Making an AJAX call to the URL for /home
+			$.ajax
+			({
+				//Getting information
+				type: "GET",
+				//Data located at the url specified by URL
+				url: URL,
+				//Input data is of type JSON
+				contentType: "application/json",
+				//Sending no data
+				data: "{}",
+				//Data is returned as html
+				dataType: "html",
+				//Function that is called upon a successful AJAX request
+				success: function(msg)
+				{
+					//Populating the div with ID "main" with the response from the server
+					document.getElementById("main").innerHTML = msg;
+				},
+				//Function that is called upon an unsuccessful AJAX request
+				error: function(jgXHR, textStatus, errorThrown)
+				{
+					//Alerting that there was an error
+					alert("Error: " + textStatus + " " + errorThrown);
+				}
+			});
+			
+		}
+		
+		//Function display_render()
+		//Purpose: Populate a div with the html code for the display
+		//Input: None
+		//Output: No direct return, populates a div with content returned from an AJAX call
+		function display_render()
+		{
+			
+			//Location of the Nodejs /calc_render code
+			var URL = "http://localhost:8080/display_render";
+
+			//Making an AJAX call to the URL for /calc_render
+			$.ajax
+			({
+				//Getting information
+				type: "GET",
+				//Data located at the url specified by URL
+				url: URL,
+				//Input data is of type JSON
+				contentType: "application/json",
+				//Sending no data
+				data: "{}",
+				//Data is returned as html
+				dataType: "html",
+				//Function that is called upon a successful AJAX request
+				success: function(msg)
+				{
+					//Populating the div with ID "main" with the response from the server
+					document.getElementById("main").innerHTML = msg;
+				},
+				//Function that is called upon an unsuccessful AJAX request
+				error: function(jgXHR, textStatus, errorThrown)
+				{
+					//Alerting that there was an error
+					alert("Error: " + textStatus + " " + errorThrown);
+				}
+			});
+			
+		}
+		
+		//Function display_select()
+		//Purpose: Determine which option was selected in the drop-down box and call its respective JavaScript Function
+		//Input: None
+		//Output: No direct return value, but one of three JavaScript functions will be called
+		function display_select()
+		{
+			
+			//Creating a variable for the selection box
+			var display_select = document.getElementById("display_select");
+			//Getting the selection option from the selection box
+			var selection = display_select.options[display_select.selectedIndex].value;
+			
+			//If the value of selection is "student"
+			if (selection == "student")
+			{
+				//Call the function display_students()
+				display_student();
+			}
+			//If the value of selection is "course"
+			else if (selection == "course")
+			{
+				//Call the function display_course()
+				display_course();
+			}
+			//If the value of selection is "grades"
+			else if (selection == "grades")
+			{				
+				//Call the function display_grades()
+				display_grades()
+			}
+		}
+		
+		
+		//Function display_student()
+		//Purpose: Display the table STUDENT
+		//Input: None
+		//Output: No direct return value, but a div will be populated with a table
+		function display_student()
+		{
+
+			//Location of the Nodejs /display_student code
+			var URL = "http://localhost:8080/display_student";
+
+			//Making an AJAX call to the URL for /display_students
+			$.ajax
+			({
+				//Getting information
+				type: "GET",
+				//Data located at the url specified by URL
+				url: URL,
+				//Input data is of type JSON
+				contentType: "application/json",
+				//Sending no data
+				data: "{}",
+				//Data is returned as html
+				dataType: "html",
+				//Function that is called upon a successful AJAX request
+				success: function(msg)
+				{
+					//Populating the div with ID "display_table" with the response from the server
+					document.getElementById("display_table").innerHTML = msg;
+				},
+				//Function that is called upon an unsuccessful AJAX request
+				error: function(jgXHR, textStatus, errorThrown)
+				{
+					//Alerting that there was an error
+					alert("Error: " + textStatus + " " + errorThrown);
+				}
+			});
+		}
+		
+		
+		//Function display_course()
+		//Purpose: Display the table COURSE
+		//Input: None
+		//Output: No direct return value, but a div will be populated with a table
+		function display_course()
+		{
+			
+			//Location of the Nodejs /display_course code
+			var URL = "http://localhost:8080/display_course";
+
+			//Making an AJAX call to the URL for /display_course
+			$.ajax
+			({
+				//Getting information
+				type: "GET",
+				//Data located at the url specified by URL
+				url: URL,
+				//Input data is of type JSON
+				contentType: "application/json",
+				//Sending no data
+				data: "{}",
+				//Data is returned as html
+				dataType: "html",
+				//Function that is called upon a successful AJAX request
+				success: function(msg)
+				{
+					//Populating the div with ID "display_table" with the response from the server
+					document.getElementById("display_table").innerHTML = msg;
+				},
+				//Function that is called upon an unsuccessful AJAX request
+				error: function(jgXHR, textStatus, errorThrown)
+				{
+					//Alerting that there was an error
+					alert("Error: " + textStatus + " " + errorThrown);
+				}
+			});
+		}
+		
+		
+		//Function display_grades()
+		//Purpose: Display the table GRADES
+		//Input: None
+		//Output: No direct return value, but a div will be populated with a table
+		function display_grades()
+		{
+			
+			//Location of the Nodejs /display_grades code
+			var URL = "http://localhost:8080/display_grades";
+
+			//Making an AJAX call to the URL for /display_grades
+			$.ajax
+			({
+				//Getting information
+				type: "GET",
+				//Data located at the url specified by URL
+				url: URL,
+				//Input data is of type JSON
+				contentType: "application/json",
+				//Sending no data
+				data: "{}",
+				//Data is returned as html
+				dataType: "html",
+				//Function that is called upon a successful AJAX request
+				success: function(msg)
+				{
+					//Populating the div with ID "display_table" with the response from the server
+					document.getElementById("display_table").innerHTML = msg;
+				},
+				//Function that is called upon an unsuccessful AJAX request
+				error: function(jgXHR, textStatus, errorThrown)
+				{
+					//Alerting that there was an error
+					alert("Error: " + textStatus + " " + errorThrown);
+				}
+			});
+		}
+		
+		//Function search_render()
+		//Purpose: Populate a div with the html code for the search
+		//Input: None
+		//Output: No direct return, populates a div with content returned from an AJAX call
+		function search_render()
+		{
+			
+			//Location of the Nodejs /search_render code
+			var URL = "http://localhost:8080/search_render";
+
+			//Making an AJAX call to the URL for /calc_render
+			$.ajax
+			({
+				//Getting information
+				type: "GET",
+				//Data located at the url specified by URL
+				url: URL,
+				//Input data is of type JSON
+				contentType: "application/json",
+				//Sending no data
+				data: "{}",
+				//Data is returned as html
+				dataType: "html",
+				//Function that is called upon a successful AJAX request
+				success: function(msg)
+				{
+					//Populating the div with ID "main" with the response from the server
+					document.getElementById("main").innerHTML = msg;
+				},
+				//Function that is called upon an unsuccessful AJAX request
+				error: function(jgXHR, textStatus, errorThrown)
+				{
+					//Alerting that there was an error
+					alert("Error: " + textStatus + " " + errorThrown);
+				}
+			});
+			
+		}
+		
+		//Function search_select()
+		//Purpose: Determine which option was selected in the drop-down box and call its respective JavaScript Function
+		//Input: None
+		//Output: No direct return value, but one of three JavaScript functions will be called
+		function search_select()
+		{
+			
+			//Creating a variable for the selection box
+			var search_select = document.getElementById("search_select");
+			//Getting the selection option from the selection box
+			var selection = search_select.options[search_select.selectedIndex].value;
+			
+			//If the value of selection is "rmm429"
+			if (selection == "rmm429")
+			{
+				//Call the function display_term_rmm429()
+				display_term_rmm429();
+			}
+			//If the value of selection is "abc123"
+			else if (selection == "abc123")
+			{
+				//Call the function display_term_abc123()
+				display_term_abc123();
+			}
+			//If the value of selection is "xyz890"
+			else if (selection == "xyz890")
+			{				
+				//Call the function display_term_xyz890()
+				display_term_xyz890()
+			}
+		}
+		
+		
+		//Function display_term_rmm429()
+		//Purpose: Display a drop-down box with avaiable terms for rmm429
+		//Input: None
+		//Output: No direct return value, but a div will be populated with a drop-down box
+		function display_term_rmm429()
+		{
+
+			//Location of the Nodejs /display_term_rmm429 code
+			var URL = "http://localhost:8080/display_term_rmm429";
+
+			//Making an AJAX call to the URL for /display_term_rmm429
+			$.ajax
+			({
+				//Getting information
+				type: "GET",
+				//Data located at the url specified by URL
+				url: URL,
+				//Input data is of type JSON
+				contentType: "application/json",
+				//Sending no data
+				data: "{}",
+				//Data is returned as html
+				dataType: "html",
+				//Function that is called upon a successful AJAX request
+				success: function(msg)
+				{
+					//Populating the div with ID "search_term" with the response from the server
+					document.getElementById("search_term").innerHTML = msg;
+				},
+				//Function that is called upon an unsuccessful AJAX request
+				error: function(jgXHR, textStatus, errorThrown)
+				{
+					//Alerting that there was an error
+					alert("Error: " + textStatus + " " + errorThrown);
+				}
+			});
+		}
+		
+		
+		//Function display_term_abc123()
+		//Purpose: Display a drop-down box with avaiable terms for abc123
+		//Input: None
+		//Output: No direct return value, but a div will be populated with a drop-down box
+		function display_term_abc123()
+		{
+
+			//Location of the Nodejs /display_term_abc123 code
+			var URL = "http://localhost:8080/display_term_abc123";
+
+			//Making an AJAX call to the URL for /display_term_abc123
+			$.ajax
+			({
+				//Getting information
+				type: "GET",
+				//Data located at the url specified by URL
+				url: URL,
+				//Input data is of type JSON
+				contentType: "application/json",
+				//Sending no data
+				data: "{}",
+				//Data is returned as html
+				dataType: "html",
+				//Function that is called upon a successful AJAX request
+				success: function(msg)
+				{
+					//Populating the div with ID "search_term" with the response from the server
+					document.getElementById("search_term").innerHTML = msg;
+				},
+				//Function that is called upon an unsuccessful AJAX request
+				error: function(jgXHR, textStatus, errorThrown)
+				{
+					//Alerting that there was an error
+					alert("Error: " + textStatus + " " + errorThrown);
+				}
+			});
+		}
+		
+		//Function display_term_xyz890()
+		//Purpose: Display a drop-down box with avaiable terms for xyz890
+		//Input: None
+		//Output: No direct return value, but a div will be populated with a drop-down box
+		function display_term_xyz890()
+		{
+
+			//Location of the Nodejs /display_term_xyz890 code
+			var URL = "http://localhost:8080/display_term_xyz890";
+
+			//Making an AJAX call to the URL for /display_term_xyz890
+			$.ajax
+			({
+				//Getting information
+				type: "GET",
+				//Data located at the url specified by URL
+				url: URL,
+				//Input data is of type JSON
+				contentType: "application/json",
+				//Sending no data
+				data: "{}",
+				//Data is returned as html
+				dataType: "html",
+				//Function that is called upon a successful AJAX request
+				success: function(msg)
+				{
+					//Populating the div with ID "search_term" with the response from the server
+					document.getElementById("search_term").innerHTML = msg;
+				},
+				//Function that is called upon an unsuccessful AJAX request
+				error: function(jgXHR, textStatus, errorThrown)
+				{
+					//Alerting that there was an error
+					alert("Error: " + textStatus + " " + errorThrown);
+				}
+			});
+		}
+		
+		
+		//Function display_table_rmm429()
+		//Purpose: Display a table for rmm429 for the selected term
+		//Input: None
+		//Output: No direct return value, but a div will be populated with a drop-down box
+		function display_table_rmm429()
+		{
+			
+			//Creating a variable for the selection box
+			var term_select = document.getElementById("term_select");
+			//Getting the selection option from the selection box
+			var selection = term_select.options[term_select.selectedIndex].value;
+			
+			//Making a JSON with the term selection
+			var term_json = { term: selection };
+
+			//Location of the Nodejs /display_table_rmm429 code
+			var URL = "http://localhost:8080/display_table_rmm429";
+
+			//Making an AJAX call to the URL for /display_table_rmm429
+			$.ajax
+			({
+				//Getting information
+				type: "GET",
+				//Data located at the url specified by URL
+				url: URL,
+				//Input data is of type JSON
+				contentType: "application/json",
+				//Sending term_json as data
+				data: term_json,
+				//Data is returned as html
+				dataType: "html",
+				//Function that is called upon a successful AJAX request
+				success: function(msg)
+				{
+					//Populating the div with ID "search_table" with the response from the server
+					document.getElementById("search_table").innerHTML = msg;
+				},
+				//Function that is called upon an unsuccessful AJAX request
+				error: function(jgXHR, textStatus, errorThrown)
+				{
+					//Alerting that there was an error
+					alert("Error: " + textStatus + " " + errorThrown);
+				}
+			});
+		}
+		
+		//Function display_table_abc123()
+		//Purpose: Display a table for abc123 for the selected term
+		//Input: None
+		//Output: No direct return value, but a div will be populated with a drop-down box
+		function display_table_abc123()
+		{
+			
+			//Creating a variable for the selection box
+			var term_select = document.getElementById("term_select");
+			//Getting the selection option from the selection box
+			var selection = term_select.options[term_select.selectedIndex].value;
+			
+			//Making a JSON with the term selection
+			var term_json = { term: selection };
+
+			//Location of the Nodejs /display_table_abc123 code
+			var URL = "http://localhost:8080/display_table_abc123";
+
+			//Making an AJAX call to the URL for /display_table_abc123
+			$.ajax
+			({
+				//Getting information
+				type: "GET",
+				//Data located at the url specified by URL
+				url: URL,
+				//Input data is of type JSON
+				contentType: "application/json",
+				//Sending term_json as data
+				data: term_json,
+				//Data is returned as html
+				dataType: "html",
+				//Function that is called upon a successful AJAX request
+				success: function(msg)
+				{
+					//Populating the div with ID "main" with the response from the server
+					document.getElementById("search_table").innerHTML = msg;
+				},
+				//Function that is called upon an unsuccessful AJAX request
+				error: function(jgXHR, textStatus, errorThrown)
+				{
+					//Alerting that there was an error
+					alert("Error: " + textStatus + " " + errorThrown);
+				}
+			});
+		}
+		
+		//Function display_table_xyz890()
+		//Purpose: Display a table for xyz890 for the selected term
+		//Input: None
+		//Output: No direct return value, but a div will be populated with a drop-down box
+		function display_table_xyz890()
+		{
+			
+			//Creating a variable for the selection box
+			var term_select = document.getElementById("term_select");
+			//Getting the selection option from the selection box
+			var selection = term_select.options[term_select.selectedIndex].value;
+			
+			//Making a JSON with the term selection
+			var term_json = { term: selection };
+
+			//Location of the Nodejs /display_table_xyz890 code
+			var URL = "http://localhost:8080/display_table_xyz890";
+
+			//Making an AJAX call to the URL for /display_students
+			$.ajax
+			({
+				//Getting information
+				type: "GET",
+				//Data located at the url specified by URL
+				url: URL,
+				//Input data is of type JSON
+				contentType: "application/json",
+				//Sending term_json as data
+				data: term_json,
+				//Data is returned as html
+				dataType: "html",
+				//Function that is called upon a successful AJAX request
+				success: function(msg)
+				{
+					//Populating the div with ID "main" with the response from the server
+					document.getElementById("search_table").innerHTML = msg;
+				},
+				//Function that is called upon an unsuccessful AJAX request
+				error: function(jgXHR, textStatus, errorThrown)
+				{
+					//Alerting that there was an error
+					alert("Error: " + textStatus + " " + errorThrown);
+				}
+			});
+		}
+		
+	</script>
+
+	<title>Richard Mangerie Lab 5</title>
+	
+</head>
+
+<body>
+
+	<div data-role="page" id="pageone">
+		
+		<!-- Creating a panel -->
+		<div data-role="panel" id="mypanel">
+			<!-- Panel button that calls the JavsScript function "home()" when pressed -->
+			<a data-rel="close" onClick="home()" class="ui-alt-icon ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-left">Home</a>
+			<!-- Panel button that calls the JavaScript function "display_render()" when pressed -->
+			<a data-rel="close" onClick="display_render()" class="ui-alt-icon ui-btn ui-shadow ui-corner-all ui-icon-grid ui-btn-icon-left">Display</a>
+			<!-- Panel button that calls the JavaScript function "search_render()" when pressed -->
+			<a data-rel="close" onClick="search_render()" class="ui-alt-icon ui-btn ui-shadow ui-corner-all ui-icon-search ui-btn-icon-left">Search</a>
+			<!-- Panel button that closes the panel -->
+			<a data-rel="close" class="ui-alt-icon ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-left">Close Menu</a>
+		</div>
+
+		<!-- Div that contains the header of the page -->
+		<div data-role="header" id="myheader">
+			<!-- Placing a button called "Menu" in the header that will display the panel -->
+			<a href="#mypanel">Menu</a>
+			<!-- Header title -->
+			<h1>Assignment 5</h1>
+		</div>
+
+		<!-- Div that contains the main content of the page -->
+		<div id="main" data-role="main" class="ui-content">
+			
+			<!-- Initially populating the div with instructions on how to use the web page -->
+			<center><h2>Instructions</h2></center>
+			<center><p>To access content, click the "Menu" button in the top left corner, which will open a menu.</p></center>
+			<center><p>There are four buttons in the menu: "Home," "Display," "Search," and "Close Menu."</p></center>
+			<center><p>The "Home" button will populate the page with the instructions you are reading currently.</p></center>
+			<center><p>The "Display" button will populate the page with a drop-down box that lists the tables you can select to display.</p></center>
+			<center><p>The "Search" button will populate the page with the drop-down box that lists the students, along with a drop-down box that lists term/year to display from.</p></center>
+			<center><p>The "Close Menu" button will close the menu and will fully display whatever content was already on the page.</p></center>
+			</center>
+			
+		</div>
+
+		<!-- Div that contains the footer of the page -->
+		<div data-role="footer">
+			<!-- Footer title -->
+			<h1>Richard Mangerie</h1>
+		</div>
+
+	</div> 
+	
+</body>
+</html>
